@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//User model
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String?
+  firstName String
+  lastName  String
+  password  String
+  quizs     Quiz[]
+  createdAt DateTime @default(now())
+}
+
+//Quiz model
+model Quiz {
+  id          Int        @id @default(autoincrement())
+  user        User?      @relation(fields: [userId], references: [id])
+  userId      Int?
+  title       String
+  description String?
+  status      Int //published->1 || drafted->0
+  slug        String?
+  questions   Question[]
+  createdAt   DateTime   @default(now())
+}
+
+//Question model
+model Question {
+  id        Int      @id @default(autoincrement())
+  quiz      Quiz?    @relation(fields: [quizId], references: [id])
+  quizId    Int?
+  text      String
+  type      Int //signle-answer->1 || multiple-choice->0
+  answers   Answer[]
+  createdAt DateTime @default(now())
+}
+
+//Answer model
+model Answer {
+  id         Int       @id @default(autoincrement())
+  question   Question? @relation(fields: [questionId], references: [id])
+  questionId Int?
+  option     String
+  isAnswer   Boolean //true||false
+  createdAt  DateTime  @default(now())
+}
