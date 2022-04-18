@@ -4,7 +4,7 @@ import axios from "axios";
 import { Layout } from "antd";
 
 import UserContext from "../../context/user";
-import HeaderComponent from "../Navigation/Header";
+import HeaderComponent from "../navigation/Header";
 import FooterComponent from "../navigation/Footer";
 
 const { Content } = Layout;

@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { Layout, Spin } from "antd";
-import HeaderComponent from "../Navigation/Header";
+import HeaderComponent from "../navigation/Header";
 import FooterComponent from "../navigation/Footer";
 import UserContext from "../../context/user";
 
